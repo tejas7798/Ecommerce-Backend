@@ -1,9 +1,9 @@
+import dotenv from 'dotenv';
+dotenv.config();
 import express, { json } from 'express';
 export const cartRouter = express.Router();
 import { Cart} from '../model/cartModel.js'
 import axios from 'axios';
-import dotenv from 'dotenv';
-dotenv.config();
 const getProductsUrl = process.env.getProductsUrl;
 
 import {verifyToken} from "../controller/tokenGeneration.js";
