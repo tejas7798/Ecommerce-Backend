@@ -10,7 +10,7 @@ import {verifyToken} from "../controller/tokenGeneration.js";
 
 cartRouter.post('/addToCart',verifyToken, async(request,response)=> {
     
-    console.log("ProductToadd " ,ProductToadd);
+    console.log("ProductToadd " ,request.body.username);
     const url =  getProductsUrl.replace(':username',  request.body.username);
 
     console.log("get product username  " ,url);
