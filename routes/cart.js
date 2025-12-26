@@ -2,11 +2,14 @@ import express, { json } from 'express';
 export const cartRouter = express.Router();
 import { Cart} from '../model/cartModel.js'
 import axios from 'axios';
+import dotenv from 'dotenv';
+dotenv.config();
+const getProductsUrl = process.env.getProductsUrl;
 
 import {verifyToken} from "../controller/tokenGeneration.js";
 
 cartRouter.post('/addToCart',verifyToken, async(request,response)=> {
-    const url =  "http://localhost:8080/cart/:username".replace(':username',  request.body.username);
+    const url =  getProductsUrl.replace(':username',  request.body.username);
     const result = await axios.get(url);
     const ProductToadd = request.body.productId;
     if(!result.data && request.body.username !== "Guest"){
@@ -29,7 +32,7 @@ cartRouter.post('/addToCart',verifyToken, async(request,response)=> {
 })
 
 cartRouter.post('/deleteCartItem', verifyToken,async(request,response)=> {
-    const url =  "http://localhost:8080/cart/:username".replace(':username',  request.body.username);
+    const url =  getProductsUrl.replace(':username',  request.body.username);
     const result = await axios.get(url);
     const productToRemove = request.body.productId;
     result.data.ProductIds = result.data.ProductIds.filter(item => item !== productToRemove);
