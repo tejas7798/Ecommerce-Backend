@@ -35,10 +35,6 @@ app.use('/api/products', router);
 
 app.use('/app/login',LoginRouter);
 
-app.use('/' ,(req,res)=>{
-    res.status(200).send("Home Page");
-})
-
 app.use('', tokenRouter);
 
 app.use('/cart',cartRouter);
