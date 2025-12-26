@@ -9,9 +9,15 @@ const getProductsUrl = process.env.getProductsUrl;
 import {verifyToken} from "../controller/tokenGeneration.js";
 
 cartRouter.post('/addToCart',verifyToken, async(request,response)=> {
+    
+    Console.log("ProductToadd " ,ProductToadd);
     const url =  getProductsUrl.replace(':username',  request.body.username);
 
+    Console.log("get product username  " ,url);
+
     const result = await axios.get(url);
+    Console.log("get product username result " ,result);
+
     const ProductToadd = request.body.productId;
     Console.log("ProductToadd " ,ProductToadd);
     try{
