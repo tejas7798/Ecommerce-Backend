@@ -11,7 +11,7 @@ import {verifyToken} from "../controller/tokenGeneration.js";
 cartRouter.post('/addToCart', async(request,response)=> {
     
     console.log("ProductToadd " ,request.body.username);
-    const url =  getProductsUrl.replace(':username',  request.body.username);
+    const url =  "https://ecommerce-backend-plum-rho.vercel.app/cart/:username".replace(':username',  request.body.username);
 
     console.log("get product username  " ,url);
 
@@ -49,7 +49,7 @@ cartRouter.post('/addToCart', async(request,response)=> {
 })
 
 cartRouter.post('/deleteCartItem',async(request,response)=> {
-    const url =  getProductsUrl.replace(':username',  request.body.username);
+    const url =  "https://ecommerce-backend-plum-rho.vercel.app/cart/:username".replace(':username',  request.body.username);
     const result = await axios.get(url);
     const productToRemove = request.body.productId;
     result.data.ProductIds = result.data.ProductIds.filter(item => item !== productToRemove);
