@@ -5,7 +5,9 @@ import { cartRouter } from "./routes/cart.js";
 import { tokenRouter } from "./routes/token.js";
 import cors from 'cors';
 const app =express();
-
+import dotenv from 'dotenv';
+dotenv.config();
+const FRONT_END = process.env.FRONT_END;
 const port = 8080;
 
 //mongo connect 
@@ -14,7 +16,7 @@ connectDB();
 app.use(express.json());    
 
 const corsOptions = {
-    origin: ['https://electronicecommerceshop.netlify.app','http://localhost:4200'],
+    origin: FRONT_END,
     credentials: true,
     optionSuccessStatus: 200
 }
@@ -22,7 +24,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 app.use(function (req, res, next) {
-    res.header('Access-Control-Allow-Origin', "https://electronicecommerceshop.netlify.app");
+    res.header('Access-Control-Allow-Origin', FRONT_END);
     res.header('Access-Control-Allow-Headers', true);
     res.header('Access-Control-Allow-Credentials', true);
     res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
