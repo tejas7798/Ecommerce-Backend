@@ -16,7 +16,7 @@ connectDB();
 app.use(express.json());    
 
 const corsOptions = {
-    origin: FRONT_END,
+    origin: "*",
     credentials: true,
     optionSuccessStatus: 200
 }
@@ -24,7 +24,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 app.use(function (req, res, next) {
-    res.header('Access-Control-Allow-Origin', FRONT_END);
+    res.header('Access-Control-Allow-Origin', '*' );
     res.header('Access-Control-Allow-Headers', true);
     res.header('Access-Control-Allow-Credentials', true);
     res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
