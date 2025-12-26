@@ -22,11 +22,14 @@ export const generateToken = (user) => {
 
 
 export const verifyToken = (req, res, next) => {
+
   const secret = req.body.username;
+  console.log("Secret ",secret)
   const authHeader = req.header("Authorization");
     if (!authHeader) return res.status(401).json({ message: "Missing token" });
 
   const token = authHeader.split(" ")[1];
+  console.log("Secret ",secret)
 
   try {
     
