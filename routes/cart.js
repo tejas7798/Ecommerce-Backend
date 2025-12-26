@@ -10,21 +10,21 @@ import {verifyToken} from "../controller/tokenGeneration.js";
 
 cartRouter.post('/addToCart',verifyToken, async(request,response)=> {
     
-    Console.log("ProductToadd " ,ProductToadd);
+    console.log("ProductToadd " ,ProductToadd);
     const url =  getProductsUrl.replace(':username',  request.body.username);
 
-    Console.log("get product username  " ,url);
+    console.log("get product username  " ,url);
 
     const result = await axios.get(url);
-    Console.log("get product username result " ,result);
+    console.log("get product username result " ,result);
 
     const ProductToadd = request.body.productId;
-    Console.log("ProductToadd " ,ProductToadd);
+    console.log("ProductToadd " ,ProductToadd);
     try{
 
         
                 if(!result.data && request.body.username !== "Guest"){
-                    Console.log("New data created");
+                    console.log("New data created");
                     const newCart = new Cart({
                         username: request.body.username,
                         ProductIds : [ProductToadd]
@@ -34,7 +34,7 @@ cartRouter.post('/addToCart',verifyToken, async(request,response)=> {
                     return;
                 }else{
                     result.data.ProductIds.push(ProductToadd);
-                    Console.log("ProductToadd " ,result.data.ProductIds);
+                    console.log("ProductToadd " ,result.data.ProductIds);
                     const created = await Cart.updateOne({username: request.body.username},{$set : result.data});
                     if(created.modifiedCount == 1){
                         console.log("Product Added")
